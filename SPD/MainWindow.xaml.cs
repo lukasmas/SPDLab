@@ -24,7 +24,7 @@ namespace SPD
     public partial class MainWindow : Window
     {
         FileStream dane;
-        DanePlik[] danePliks = new DanePlik[120];
+        DanePlik[] danePliks = new DanePlik[121];
 
 
         public MainWindow()
@@ -51,23 +51,77 @@ namespace SPD
         public void UseData()
         {
             StreamReader sr = new StreamReader(dane);
-            int i = 0;
+            int indeks = 0;
             
 
-            while (!sr.EndOfStream)
+            while (!sr.EndOfStream )
             {
                 
                 if(sr.ReadLine().Contains("ta"))
                 {
-                    string numer = i.ToString;
-                    string nazwa = "ta" + numer;
-                    //int w, h;
+                    string nazwa = "ta";
+                    if(indeks <10)
+                    {
+                        nazwa +="00" + (indeks).ToString();
+                    }
+                    else if (indeks < 100)
+                    {
+                        nazwa += "0" + (indeks).ToString();
+                    }
+                    else
+                    {
+                        nazwa +=  (indeks).ToString();
+                    }
+
+                    int w, h;
+                    string[] wart = sr.ReadLine().Split();
+
+                    h = int.Parse(wart[0]);
+                    w = int.Parse(wart[1]);
+                    int[,] arr = new int[h, w];
+
+                    
+                   
+                    
+
+
+                    for (int i = 0; i < h; i++)
+                     {
+                        string[] vs = sr.ReadLine().Split();
+
+                        
+
+                        int x = 0;
+                         for (int j = 0; j < vs.Length; j++)
+                         {
+                            try
+                            {
+                                if (vs[j] != "")
+                                    arr[i, x++] = int.Parse(vs[j]);
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+
+                         }
+                     }
+
+                   
 
 
 
-                    //danePliks[i] = new DanePlik();
+
+
+                    danePliks[indeks] = new DanePlik(nazwa, h,w, arr);
+
+                    indeks++;
+
+
                 }
                 
+
+
             }
         }
 

@@ -8,5 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Załaduj plik" HorizontalAlignment="Left" Height="46" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click"/>
+        <TextBox x:Name="pole1" HorizontalAlignment="Left" Height="138" Margin="21,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183"/>
     </Grid>
 </Window>
