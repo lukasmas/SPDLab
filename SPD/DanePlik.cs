@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace SPD
 {
     class DanePlik
@@ -26,8 +25,12 @@ namespace SPD
                     czasy[i, j] = vs[i, j];
                 }
             }
+            
+        }
 
-
+       public void Draw123()
+        {
+            
         }
 
         

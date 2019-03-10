@@ -24,7 +24,8 @@ namespace SPD
     public partial class MainWindow : Window
     {
         FileStream dane;
-        DanePlik[] danePliks = new DanePlik[121];
+        List<DanePlik> danePliks = new List<DanePlik>();
+        int mv = 0;
 
 
         public MainWindow()
@@ -32,6 +33,12 @@ namespace SPD
             InitializeComponent();
             
 
+        }
+
+        public void MainWindow_Load()
+        {
+            
+            
         }
 
         public void LoadData()
@@ -50,78 +57,72 @@ namespace SPD
 
         public void UseData()
         {
-            StreamReader sr = new StreamReader(dane);
-            int indeks = 0;
-            
-
-            while (!sr.EndOfStream )
+            if (dane != null)
             {
-                
-                if(sr.ReadLine().Contains("ta"))
+                StreamReader sr = new StreamReader(dane);
+                int indeks = 0;
+
+
+                while (!sr.EndOfStream)
                 {
-                    string nazwa = "ta";
-                    if(indeks <10)
+
+                    if (sr.ReadLine().Contains("ta"))
                     {
-                        nazwa +="00" + (indeks).ToString();
-                    }
-                    else if (indeks < 100)
-                    {
-                        nazwa += "0" + (indeks).ToString();
-                    }
-                    else
-                    {
-                        nazwa +=  (indeks).ToString();
-                    }
+                        string nazwa = "ta";
+                        if (indeks < 10)
+                        {
+                            nazwa += "00" + (indeks).ToString();
+                        }
+                        else if (indeks < 100)
+                        {
+                            nazwa += "0" + (indeks).ToString();
+                        }
+                        else
+                        {
+                            nazwa += (indeks).ToString();
+                        }
 
-                    int w, h;
-                    string[] wart = sr.ReadLine().Split();
+                        int w, h;
+                        string[] wart = sr.ReadLine().Split();
 
-                    h = int.Parse(wart[0]);
-                    w = int.Parse(wart[1]);
-                    int[,] arr = new int[h, w];
+                        h = int.Parse(wart[0]);
+                        w = int.Parse(wart[1]);
+                        int[,] arr = new int[h, w];
 
-                    
-                   
-                    
+                        for (int i = 0; i < h; i++)
+                        {
+                            string[] vs = sr.ReadLine().Split();
 
 
-                    for (int i = 0; i < h; i++)
-                     {
-                        string[] vs = sr.ReadLine().Split();
 
-                        
-
-                        int x = 0;
-                         for (int j = 0; j < vs.Length; j++)
-                         {
-                            try
+                            int x = 0;
+                            for (int j = 0; j < vs.Length; j++)
                             {
-                                if (vs[j] != "")
-                                    arr[i, x++] = int.Parse(vs[j]);
-                            }
-                            catch (Exception)
-                            {
+                                try
+                                {
+                                    if (vs[j] != "")
+                                        arr[i, x++] = int.Parse(vs[j]);
+                                }
+                                catch (Exception)
+                                {
+
+                                }
 
                             }
+                        }
 
-                         }
-                     }
+                        DanePlik temp = new DanePlik(nazwa, h, w, arr);
 
-                   
+                        danePliks.Add(temp);
 
-
-
+                        indeks++;
 
 
-                    danePliks[indeks] = new DanePlik(nazwa, h,w, arr);
+                    }
 
-                    indeks++;
 
 
                 }
-                
-
-
             }
         }
 
@@ -129,6 +130,37 @@ namespace SPD
         {
             LoadData();
             UseData();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Rectangle rec = new Rectangle()
+            {
+                Width = 50,
+                Height = 20,
+                Fill = Brushes.AliceBlue,
+                
+            };
+
+
+            canvas.Children.Add(rec);
+            Canvas.SetTop(rec, 20+mv);
+            Canvas.SetLeft(rec, 20+mv);
+
+            Label lab = new Label()
+            {
+                Content = "1",
+               // Width = 20,
+               // Height = 20,
+                FontSize = 20,
+
+
+            };
+            canvas.Children.Add(lab);
+            Canvas.SetTop(lab, 10+mv);
+            Canvas.SetLeft(lab, 35+mv);
+
+            mv += 22;
         }
     }
 

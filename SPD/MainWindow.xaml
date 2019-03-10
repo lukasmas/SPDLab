@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:SPD"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="grid">
         <Button Content="Załaduj plik" HorizontalAlignment="Left" Height="46" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click"/>
-        <TextBox x:Name="pole1" HorizontalAlignment="Left" Height="138" Margin="21,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="31" Margin="577,10,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_1"/>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="277" Margin="10,132,0,0" VerticalAlignment="Top" Width="772"/>
     </Grid>
 </Window>
