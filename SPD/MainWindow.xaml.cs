@@ -44,7 +44,7 @@ namespace SPD
         public void LoadData()
         {
 
-
+            danePliks.Clear();
             OpenFileDialog openDialog = new OpenFileDialog();
 
             if (openDialog.ShowDialog() == true)
@@ -134,34 +134,103 @@ namespace SPD
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (dane != null && danePliks.Count > 0)
+            {
+                xd.Text = danePliks[0].nazwa;
+                danePliks[0].Draw123();
+                foreach (var item in danePliks)
+                {
+                    combo1.Items.Add(item.nazwa);
+
+                }
+                combo1.SelectedIndex = 0;
+
+            }
+
+            else
+            {
+                combo1.Items.Clear();
+                xd.Text = "";
+                
+            }
+        
+        }
+
+        public void Draw123()
+        {
+
+            DanePlik temp = danePliks[0];
+            int t_czas = 0;
+
+            for (int i = 0; i <temp.maszyny; i++)
+            {
+
+
+                t_czas += temp.czasy[0, i];
+
+                Rectangle rec = new Rectangle()
+                {
+                    Width = t_czas,
+                    Height = 20,
+                    Fill = Brushes.AliceBlue,
+
+                };
+
+                
+                canvas.Children.Add(rec);
+                Canvas.SetTop(rec, 20 + mv);
+                Canvas.SetLeft(rec, 20 + mv);
+
+                Label lab = new Label()
+                {
+                    Content = "1",
+                    
+                    FontSize = 20,
+
+
+                };
+                canvas.Children.Add(lab);
+                Canvas.SetTop(lab, 10 + mv);
+                Canvas.SetLeft(lab, 35 + mv);
+
+                mv += 22;
+            }
+        }
+
+        private void combo1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
             Rectangle rec = new Rectangle()
             {
                 Width = 50,
                 Height = 20,
                 Fill = Brushes.AliceBlue,
-                
+
             };
 
 
             canvas.Children.Add(rec);
-            Canvas.SetTop(rec, 20+mv);
-            Canvas.SetLeft(rec, 20+mv);
+            Canvas.SetTop(rec, 20 + mv);
+            Canvas.SetLeft(rec, 20 + mv);
 
             Label lab = new Label()
             {
-                Content = "1",
-               // Width = 20,
-               // Height = 20,
+                Content = ((mv/22)+1).ToString(),
+                // Width = 20,
+                // Height = 20,
                 FontSize = 20,
 
 
             };
             canvas.Children.Add(lab);
-            Canvas.SetTop(lab, 10+mv);
-            Canvas.SetLeft(lab, 35+mv);
+            Canvas.SetTop(lab, 10 + mv);
+            Canvas.SetLeft(lab, 35 + mv);
 
             mv += 22;
+            xd.Text = combo1.SelectedValue.ToString();
         }
+
+        
     }
 
         
