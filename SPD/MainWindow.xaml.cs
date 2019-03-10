@@ -25,20 +25,34 @@ namespace SPD
     {
         FileStream dane;
         List<DanePlik> danePliks = new List<DanePlik>();
-        int mv = 0;
-
+        
+        public System.Windows.ShutdownMode ShutdownMode { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
             
+            for (int i = 0; i < 30; i++)
+            {
+                for (int j = 0; j < 60; j++)
+                {
+                    Rectangle rec = new Rectangle()
+                    {
+                        Width = 20,
+                        Height = 20,
+                        Fill = Brushes.White,
+                        Stroke = Brushes.Black,
 
-        }
+                    };
 
-        public void MainWindow_Load()
-        {
-            
-            
+
+                    canvas.Children.Add(rec);
+                    Canvas.SetTop(rec,  i*20);
+                    Canvas.SetLeft(rec,  j*20);
+                }
+            }
+
         }
 
         public void LoadData()
@@ -123,21 +137,29 @@ namespace SPD
 
 
                 }
+
+                sr.Close();
+                
             }
+
+            dane.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
             UseData();
+            FillCombo();
+            
+            
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void FillCombo()
         {
             if (dane != null && danePliks.Count > 0)
             {
                 xd.Text = danePliks[0].nazwa;
-                danePliks[0].Draw123();
+                //danePliks[0].Draw123();
                 foreach (var item in danePliks)
                 {
                     combo1.Items.Add(item.nazwa);
@@ -160,77 +182,121 @@ namespace SPD
         {
 
             DanePlik temp = danePliks[0];
-            int t_czas = 0;
+            int t_czas, t_przes;
 
-            for (int i = 0; i <temp.maszyny; i++)
+            int[] t_zwolnienia = new int[temp.maszyny];
+            byte r, g, b;
+
+            Array.Clear(t_zwolnienia, 0, t_zwolnienia.Length);
+
+            Random rnd = new Random();
+
+
+            for (int z = 0; z < temp.zadania; z++)
             {
+                t_czas = t_przes = 0;
+                int mv = 0;
+                r = (byte)rnd.Next(255);
+                g = (byte)rnd.Next(255);
+                b = (byte)rnd.Next(255);
 
-
-                t_czas += temp.czasy[0, i];
-
-                Rectangle rec = new Rectangle()
+                for (int i = 0; i < temp.maszyny; i++)
                 {
-                    Width = t_czas,
-                    Height = 20,
-                    Fill = Brushes.AliceBlue,
 
-                };
-
-                
-                canvas.Children.Add(rec);
-                Canvas.SetTop(rec, 20 + mv);
-                Canvas.SetLeft(rec, 20 + mv);
-
-                Label lab = new Label()
-                {
-                    Content = "1",
+                   
+                    t_czas = (temp.czasy[z, i]);
                     
-                    FontSize = 20,
+                    
+                    
+
+                    int t_czas2 = t_czas * 20 ;
+
+                    Rectangle rec = new Rectangle()
+                    {
+                        Width = t_czas2,
+                        Height = 40,
+                        Fill = new SolidColorBrush(Color.FromRgb(r, g, b)),
+                        Stroke = Brushes.Black,
+
+                    };
 
 
-                };
-                canvas.Children.Add(lab);
-                Canvas.SetTop(lab, 10 + mv);
-                Canvas.SetLeft(lab, 35 + mv);
+                    canvas.Children.Add(rec);
+                    Canvas.SetTop(rec, 20 + mv);
+                    if(i == 0)
+                    {
+                        
+                        Canvas.SetLeft(rec, 20 + t_zwolnienia[i]);
+                        
+                    }
+                    else
+                    {
+                        if(t_przes > t_zwolnienia[i])
+                            Canvas.SetLeft(rec, 20 + t_przes);
+                        else
+                            Canvas.SetLeft(rec, 20 + t_przes + (t_zwolnienia[i]-t_przes));
 
-                mv += 22;
+
+                    }
+
+
+                    Label lab = new Label()
+                    {
+                        Content = (z + 1).ToString(),
+
+                        FontSize = 20,
+                        Foreground = new SolidColorBrush(Color.FromRgb((byte)(255 - r), (byte)(255 - g), (byte)(255 - b))),
+
+
+                    };
+                    canvas.Children.Add(lab);
+                    Canvas.SetTop(lab, 10 + mv);
+                    if (i == 0)
+                    {
+                        Canvas.SetLeft(lab, 10 + (t_czas2) / 2 + t_przes + t_zwolnienia[i]);
+                        t_przes += (t_czas2 + t_zwolnienia[i]);
+                    }
+                    else
+                    {
+                        if (t_przes > t_zwolnienia[i])
+                        {
+                            Canvas.SetLeft(lab, 10 + (t_czas2) / 2 + t_przes);
+                            t_przes += (t_czas2);
+                        }
+                        else
+                        {
+                            Canvas.SetLeft(lab, 10 + (t_czas2) / 2 + t_przes + (t_zwolnienia[i] - t_przes));
+                            t_przes += (t_czas2) + (t_zwolnienia[i] - t_przes);
+                        }
+                    }
+                    
+                    
+                    
+
+                    if(i==0 || z == 0)
+                        t_zwolnienia[i] += t_czas2;
+                    else
+                    {
+                        t_zwolnienia[i] = t_zwolnienia[i - 1] + t_czas2;
+                    }
+
+                    mv += 60;
+                }
             }
+            xd.Text = (t_zwolnienia[temp.maszyny - 1]/20).ToString();
         }
 
         private void combo1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            Rectangle rec = new Rectangle()
-            {
-                Width = 50,
-                Height = 20,
-                Fill = Brushes.AliceBlue,
 
-            };
-
-
-            canvas.Children.Add(rec);
-            Canvas.SetTop(rec, 20 + mv);
-            Canvas.SetLeft(rec, 20 + mv);
-
-            Label lab = new Label()
-            {
-                Content = ((mv/22)+1).ToString(),
-                // Width = 20,
-                // Height = 20,
-                FontSize = 20,
-
-
-            };
-            canvas.Children.Add(lab);
-            Canvas.SetTop(lab, 10 + mv);
-            Canvas.SetLeft(lab, 35 + mv);
-
-            mv += 22;
-            xd.Text = combo1.SelectedValue.ToString();
+            Draw123();
+            //xd.Text = combo1.SelectedValue.ToString();
         }
 
-        
+        private void Rysuj(object sender, RoutedEventArgs e)
+        {
+            Draw123();
+        }
     }
 
         

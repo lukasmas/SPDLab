@@ -8,7 +8,7 @@
         Title="MainWindow" Height="600" Width="800">
     <Grid x:Name="grid" Margin="0,0,-8,20">
         <Button Content="Załaduj plik" HorizontalAlignment="Left" Height="46" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="31" Margin="577,10,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_1"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="31" Margin="577,10,0,0" VerticalAlignment="Top" Width="126"/>
         <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="443" Margin="0,96,0,0" VerticalAlignment="Top" Width="790"/>
         <TextBox x:Name="xd" HorizontalAlignment="Left" Height="37" Margin="441,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="113"/>
         <ComboBox x:Name="combo1" HorizontalAlignment="Left" Margin="261,10,0,0" VerticalAlignment="Top" Width="134" Height="28" SelectionChanged="combo1_SelectionChanged"/>
