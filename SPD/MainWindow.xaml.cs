@@ -33,6 +33,12 @@ namespace SPD
             InitializeComponent();
             ShutdownMode = ShutdownMode.OnMainWindowClose;
             
+    
+
+        }
+
+        private void Siatka()
+        {
             for (int i = 0; i < 30; i++)
             {
                 for (int j = 0; j < 60; j++)
@@ -47,12 +53,29 @@ namespace SPD
                     };
 
 
+
+
+
                     canvas.Children.Add(rec);
-                    Canvas.SetTop(rec,  i*20);
-                    Canvas.SetLeft(rec,  j*20);
+                    Canvas.SetTop(rec, i * 20);
+                    Canvas.SetLeft(rec, j * 20);
+
+                    if (i == 0) { 
+
+                        Label lab = new Label
+                        {
+                            FontSize = 20,
+                            Content = j.ToString(),
+
+                        };
+
+                        canvas.Children.Add(lab);
+                        Canvas.SetTop(lab, 10);
+                        Canvas.SetLeft(lab, 10 + j * 20);
+                    }
+
                 }
             }
-
         }
 
         public void LoadData()
@@ -182,7 +205,7 @@ namespace SPD
         {
 
             DanePlik temp = danePliks[0];
-            int t_czas, t_przes;
+            int t_czas;
 
             int[] t_zwolnienia = new int[temp.maszyny];
             byte r, g, b;
@@ -194,7 +217,7 @@ namespace SPD
 
             for (int z = 0; z < temp.zadania; z++)
             {
-                t_czas = t_przes = 0;
+                t_czas = 0;
                 int mv = 0;
                 r = (byte)rnd.Next(255);
                 g = (byte)rnd.Next(255);
@@ -231,10 +254,10 @@ namespace SPD
                     }
                     else
                     {
-                        if(t_przes > t_zwolnienia[i])
-                            Canvas.SetLeft(rec, 20 + t_przes);
+                        if(t_zwolnienia[i] >= t_zwolnienia[i-1])
+                            Canvas.SetLeft(rec, 20 + t_zwolnienia[i]);
                         else
-                            Canvas.SetLeft(rec, 20 + t_przes + (t_zwolnienia[i]-t_przes));
+                            Canvas.SetLeft(rec, 20 + t_zwolnienia[i-1]);
 
 
                     }
@@ -251,34 +274,29 @@ namespace SPD
                     };
                     canvas.Children.Add(lab);
                     Canvas.SetTop(lab, 10 + mv);
+                    if(i ==0)
+                        Canvas.SetLeft(lab, 10 + t_czas2/2 + t_zwolnienia[i]);
+                    else
+                    {
+                        if (t_zwolnienia[i] >= t_zwolnienia[i - 1])
+                            Canvas.SetLeft(lab, 10 + t_czas2 / 2 + t_zwolnienia[i]);
+                        else
+                            Canvas.SetLeft(lab, 10 + t_czas2 / 2 + t_zwolnienia[i-1]);
+                    }
+
+
                     if (i == 0)
                     {
-                        Canvas.SetLeft(lab, 10 + (t_czas2) / 2 + t_przes + t_zwolnienia[i]);
-                        t_przes += (t_czas2 + t_zwolnienia[i]);
-                    }
-                    else
-                    {
-                        if (t_przes > t_zwolnienia[i])
-                        {
-                            Canvas.SetLeft(lab, 10 + (t_czas2) / 2 + t_przes);
-                            t_przes += (t_czas2);
-                        }
-                        else
-                        {
-                            Canvas.SetLeft(lab, 10 + (t_czas2) / 2 + t_przes + (t_zwolnienia[i] - t_przes));
-                            t_przes += (t_czas2) + (t_zwolnienia[i] - t_przes);
-                        }
-                    }
-                    
-                    
-                    
-
-                    if(i==0 || z == 0)
                         t_zwolnienia[i] += t_czas2;
+                    }
                     else
                     {
-                        t_zwolnienia[i] = t_zwolnienia[i - 1] + t_czas2;
+                        if(t_zwolnienia[i] >= t_zwolnienia[i-1])
+                            t_zwolnienia[i] += (t_czas2);
+                        else
+                            t_zwolnienia[i] = t_zwolnienia[i-1] + (t_czas2);
                     }
+                    
 
                     mv += 60;
                 }
@@ -295,7 +313,9 @@ namespace SPD
 
         private void Rysuj(object sender, RoutedEventArgs e)
         {
-            Draw123();
+            //Draw123();
+            canvas.Children.Clear();
+            Siatka();
         }
     }
 
