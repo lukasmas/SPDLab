@@ -32,15 +32,16 @@ namespace SPD
         {
             InitializeComponent();
             ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Siatka();
             
+    
+
         }
 
         private void Siatka()
         {
             for (int i = 0; i < 30; i++)
             {
-                for (int j = 0; j < 1280/20; j++)
+                for (int j = 0; j < 60; j++)
                 {
                     Rectangle rec = new Rectangle()
                     {
@@ -50,24 +51,28 @@ namespace SPD
                         Stroke = Brushes.Black,
 
                     };
-                    
+
+
+
+
+
                     canvas.Children.Add(rec);
                     Canvas.SetTop(rec, i * 20);
                     Canvas.SetLeft(rec, j * 20);
 
-                    if (i == 2) { 
+                    if (i == 0) { 
 
                         Label lab = new Label
                         {
-                            FontSize = 12,
+                            FontSize = 20,
                             Content = j.ToString(),
 
                         };
 
                         canvas.Children.Add(lab);
-                        Canvas.SetTop(lab, -5);
-                        Canvas.SetLeft(lab, j * 20);
-                   }
+                        Canvas.SetTop(lab, 10);
+                        Canvas.SetLeft(lab, 10 + j * 20);
+                    }
 
                 }
             }
@@ -151,16 +156,17 @@ namespace SPD
 
 
                     }
-
-
+                   
 
                 }
 
                 sr.Close();
                 
             }
+            
 
             dane.Close();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -222,7 +228,7 @@ namespace SPD
                 {
 
                    
-                    t_czas = (temp.czasy[z, i]);
+                    t_czas = (temp.JohnsonNaSztywno()[z, i]);
                     
                     
                     
@@ -311,7 +317,61 @@ namespace SPD
             //Draw123();
             canvas.Children.Clear();
             Siatka();
+            kupa.Text = FunkcjaLiczacaCzas();
+            // danePliks[0].Johnson();
+           
         }
+        public string FunkcjaLiczacaCzas()
+        {
+
+            DanePlik temp = danePliks[0];
+            int t_czas;
+
+            int[] t_zwolnienia = new int[temp.maszyny];
+          
+
+
+            for (int z = 0; z < temp.zadania; z++)
+            {
+                t_czas = 0;
+                
+
+                for (int i = 0; i < temp.maszyny; i++)
+                {
+
+
+                    t_czas = (temp.JohnsonNaSztywno()[z, i]);
+
+
+
+
+                    int t_czas2 = t_czas;
+
+                   
+
+
+                    if (i == 0)
+                    {
+                        t_zwolnienia[i] += t_czas2;
+                    }
+                    else
+                    {
+                        if (t_zwolnienia[i] >= t_zwolnienia[i - 1])
+                            t_zwolnienia[i] += (t_czas2);
+                        else
+                            t_zwolnienia[i] = t_zwolnienia[i - 1] + (t_czas2);
+                    }
+
+
+                    
+                }
+            }
+            int cmax;
+            cmax = (t_zwolnienia[temp.maszyny - 1] );
+            return cmax.ToString();
+            //xd.Text = (t_zwolnienia[temp.maszyny - 1] / 20).ToString();
+        }
+
     }
 
         
