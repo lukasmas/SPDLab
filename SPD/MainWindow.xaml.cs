@@ -32,16 +32,15 @@ namespace SPD
         {
             InitializeComponent();
             ShutdownMode = ShutdownMode.OnMainWindowClose;
+            Siatka();
             
-    
-
         }
 
         private void Siatka()
         {
             for (int i = 0; i < 30; i++)
             {
-                for (int j = 0; j < 60; j++)
+                for (int j = 0; j < 1280/20; j++)
                 {
                     Rectangle rec = new Rectangle()
                     {
@@ -51,28 +50,24 @@ namespace SPD
                         Stroke = Brushes.Black,
 
                     };
-
-
-
-
-
+                    
                     canvas.Children.Add(rec);
                     Canvas.SetTop(rec, i * 20);
                     Canvas.SetLeft(rec, j * 20);
 
-                    if (i == 0) { 
+                    if (i == 2) { 
 
                         Label lab = new Label
                         {
-                            FontSize = 20,
+                            FontSize = 12,
                             Content = j.ToString(),
 
                         };
 
                         canvas.Children.Add(lab);
-                        Canvas.SetTop(lab, 10);
-                        Canvas.SetLeft(lab, 10 + j * 20);
-                    }
+                        Canvas.SetTop(lab, -5);
+                        Canvas.SetLeft(lab, j * 20);
+                   }
 
                 }
             }
