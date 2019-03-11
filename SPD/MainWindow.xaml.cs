@@ -319,7 +319,7 @@ namespace SPD
             canvas.Children.Clear();
             Siatka();
             //kupa.Text = danePliks[0].tasksList.Count().ToString();
-            danePliks[0].Johnson();
+           // danePliks[0].Johnson();
             
         }
 
