@@ -33,9 +33,14 @@ namespace SPD
                     count++;
                 }
             }
-            else
+            else if (maszyny==2)
             {
-                wirtualneZadania = tasksList;
+                count = 0;
+                foreach (Task element in tasksList)
+                {
+                    wirtualneZadania.Add(new Task(count, element.machineTime1, element.machineTime2));
+                        count++;
+                }
            }
             while (wirtualneZadania.Count>0)
                 {
@@ -100,16 +105,34 @@ namespace SPD
         {
             int dlugosc = tasklist.Count();
             int count = 0;
-            int[,] tablica = new int[dlugosc, 3];
-            foreach( Task element in tasklist)
+            if (maszyny == 3)
             {
-                tablica[count, 0] = element.machineTime1;
-                tablica[count, 1] = element.machineTime2;
-                tablica[count, 2] = element.machineTime3;
+                int[,] tablica = new int[dlugosc, 3];
+                foreach (Task element in tasklist)
+                {
+                    tablica[count, 0] = element.machineTime1;
+                    tablica[count, 1] = element.machineTime2;
+                    tablica[count, 2] = element.machineTime3;
 
-                count++;
+                    count++;
+                }
+                return tablica;
             }
-            return tablica;
+            else 
+            {
+                int[,] tablica = new int[dlugosc, 2];
+                foreach (Task element in tasklist)
+                {
+                    tablica[count, 0] = element.machineTime1;
+                    tablica[count, 1] = element.machineTime2;
+                    
+
+                    count++;
+                }
+
+                return tablica;
+
+            }
         }
 
         public int[,] JohnsonNaSztywno()
@@ -134,16 +157,21 @@ namespace SPD
                     czasy[i, j] = vs[i, j];
                 }
             }
-
+            if (maszyny==3)
             for (int i = 0; i < h; i++)
             {
                 tasksList.Add(new Task(i,vs[i,0],vs[i,1],vs[i,2]));
             }
+            if (maszyny==2)
+                for (int i = 0; i < h; i++)
+                {
+                tasksList.Add(new Task(i, vs[i, 0], vs[i, 1]));
+            }
 
 
         }
+       
 
-      
-        
+
     }
 }
