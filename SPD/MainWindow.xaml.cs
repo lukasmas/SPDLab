@@ -156,8 +156,7 @@ namespace SPD
 
 
                     }
-
-
+                   
 
                 }
 
@@ -318,9 +317,59 @@ namespace SPD
             //Draw123();
             canvas.Children.Clear();
             Siatka();
-            //kupa.Text = danePliks[0].tasksList.Count().ToString();
+            kupa.Text = FunkcjaLiczacaCzas();
             // danePliks[0].Johnson();
            
+        }
+        public string FunkcjaLiczacaCzas()
+        {
+
+            DanePlik temp = danePliks[0];
+            int t_czas;
+
+            int[] t_zwolnienia = new int[temp.maszyny];
+          
+
+
+            for (int z = 0; z < temp.zadania; z++)
+            {
+                t_czas = 0;
+                
+
+                for (int i = 0; i < temp.maszyny; i++)
+                {
+
+
+                    t_czas = (temp.JohnsonNaSztywno()[z, i]);
+
+
+
+
+                    int t_czas2 = t_czas;
+
+                   
+
+
+                    if (i == 0)
+                    {
+                        t_zwolnienia[i] += t_czas2;
+                    }
+                    else
+                    {
+                        if (t_zwolnienia[i] >= t_zwolnienia[i - 1])
+                            t_zwolnienia[i] += (t_czas2);
+                        else
+                            t_zwolnienia[i] = t_zwolnienia[i - 1] + (t_czas2);
+                    }
+
+
+                    
+                }
+            }
+            int cmax;
+            cmax = (t_zwolnienia[temp.maszyny - 1] );
+            return cmax.ToString();
+            //xd.Text = (t_zwolnienia[temp.maszyny - 1] / 20).ToString();
         }
 
     }
