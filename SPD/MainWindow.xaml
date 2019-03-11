@@ -1,0 +1,19 @@
+﻿<Window x:Class="SPD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPD"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid x:Name="grid" Margin="0,0,-8,20">
+        <Button Content="Załaduj plik" HorizontalAlignment="Left" Height="46" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="31" Margin="577,10,0,0" VerticalAlignment="Top" Width="126"/>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="443" Margin="0,96,0,0" VerticalAlignment="Top" Width="790"/>
+        <TextBox x:Name="xd" HorizontalAlignment="Left" Height="37" Margin="441,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="113"/>
+        <ComboBox x:Name="combo1" HorizontalAlignment="Left" Margin="261,10,0,0" VerticalAlignment="Top" Width="134" Height="28" SelectionChanged="combo1_SelectionChanged"/>
+        <Label Content="Seria danych:" HorizontalAlignment="Left" Height="31" Margin="161,10,0,0" VerticalAlignment="Top" Width="79"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="35" Margin="577,56,0,0" VerticalAlignment="Top" Width="126" Click="Rysuj"/>
+        <TextBox x:Name="kupa" HorizontalAlignment="Left" Height="23" Margin="415,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>
