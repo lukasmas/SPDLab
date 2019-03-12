@@ -414,29 +414,34 @@ namespace SPD
         public void CreateData()
         {
             Random rnd = new Random();
-            int a = int.Parse(iloscMaszyn.Text);
-            int b= int.Parse(iloscZadan.Text);
+            
+                int a = int.Parse(iloscMaszyn.Text);
+                int b = int.Parse(iloscZadan.Text);
+           
+
             string [,] temp = new string[a, b];
           
             if ((!File.Exists("scores.txt")))
                 using (FileStream fs = File.Create("D:/data.txt")) //Creates Scores.txt
         {
                     StreamWriter sw = new StreamWriter(fs);
-                    sw.Write("ta001\n");
-                    sw.Write(a + " " + b + "\n");
-                     for (int i = 0; i < a; i++)
-                     {
-                         for (int j = 0; j < b; j++)
-                         {
-                           
-                            temp[i, j] = rnd.Next(1, 100)+" ";
-                             sw.Write(temp[i, j]);
-                          
-                        }
-                        sw.Write("\n");
-                       
-                    }
+                    for (int h = 0; h < a; h++)
+                    {
+                        sw.Write("ta"+h+"\n");
+                        sw.Write(a + " " + b + "\n");
+                        for (int i = 0; i < a; i++)
+                        {
+                            for (int j = 0; j < b; j++)
+                            {
 
+                                temp[i, j] = rnd.Next(1, 15) + " ";
+                                sw.Write(temp[i, j]);
+
+                            }
+                            sw.Write("\n");
+
+                        }
+                    }
                     sw.Close();
                 }
         }
