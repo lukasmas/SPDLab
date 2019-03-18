@@ -166,32 +166,29 @@ namespace SPD
             List<Zadanie> zadanieOstateczne = new List<Zadanie>();
             int numer=0;
             // Zadanie hg=null;
-            bool logiczna=false ;
+            
             int[,] czasyy1 = new int[zadania, maszyny];
 
             for (int i = 0; i < zadania; i++)
             {
               //  
                 int czas = 999999999;
-                numer = 0;
+               
                 if (sortedList.Count > 0)
                 {
                     
                     for (int h = 0; h < i + 1; h++)
 
                     {
-                      //  
+                      
 
 
-                        if (h == i
-                           )
-                            zadanieOstateczne.Add(sortedList[sortedList.Count - 1]);
-                        else
+                      
                         
                             zadanieOstateczne.Insert(h, sortedList[sortedList.Count - 1]);
 
                        
-                        //Array.Clear(czasyy1, 0, czasyy1.Length);
+                        
                         foreach (Zadanie zadanie in zadanieOstateczne)
                         {
                             
@@ -204,23 +201,21 @@ namespace SPD
                         
 
                         int tmpczas = Czas(czasyy1);
-                        MessageBox.Show(tmpczas.ToString()+" ",h.ToString());
+                       
 
                         if (tmpczas < czas)
                         {
                             czas = tmpczas;
                           
                             numer = h;
-                            zadanieOstateczne.RemoveAt(h);
-                            if (h == i)
-                                logiczna = true;
-                            else
-                                logiczna = false;
+                       
+                            zadanieOstateczne.Remove(sortedList[sortedList.Count - 1]);
+                            
                         }
 
                         else
                         {
-                            zadanieOstateczne.RemoveAt(h);
+                            zadanieOstateczne.Remove(sortedList[sortedList.Count - 1]);
 
                        
                         }
@@ -228,15 +223,11 @@ namespace SPD
 
 
                     }
-                    if (logiczna)
-                    {
-                        zadanieOstateczne.Add(sortedList[sortedList.Count - 1]);
-                       
-                    }
-                    else
+                   
                         zadanieOstateczne.Insert(numer, sortedList[sortedList.Count - 1]);
                     
                     sortedList.RemoveAt(sortedList.Count - 1);
+                  
                 }
 
 
