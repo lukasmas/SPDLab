@@ -249,6 +249,7 @@ namespace SPD
                         numery = temp.bestOptJ;
                         //xd.Text = temp.Czas(temp.JohnsonNaSztywno()).ToString();
                         xd.Text = temp.Czas(temp.Neh()).ToString();
+                      //  kupa.Text += temp.permutacje[i] + " : " + temp.czasy_permutacje[i].ToString() + " \n";
                         break;
                     }
 

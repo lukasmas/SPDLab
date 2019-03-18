@@ -164,62 +164,83 @@ namespace SPD
         {
             List<Zadanie> sortedList = zadaniesList.OrderBy(o => o.timeAll).ToList();
             List<Zadanie> zadanieOstateczne = new List<Zadanie>();
-            
+            int numer=0;
+            // Zadanie hg=null;
+            bool logiczna=false ;
             int[,] czasyy1 = new int[zadania, maszyny];
 
             for (int i = 0; i < zadania; i++)
             {
-                
-                { 
-                for (int h = 0; h < i+1 ; h++)
-                        if (sortedList.Count > 0)
-                        {
-                    int czas = 999999;
+              //  
+                int czas = 999999999;
+                numer = 0;
+                if (sortedList.Count > 0)
+                {
                     
+                    for (int h = 0; h < i + 1; h++)
+
                     {
+                      //  
 
-                       if (h == i
-                          )
-                           zadanieOstateczne.Add(sortedList[sortedList.Count - 1]);
+
+                        if (h == i
+                           )
+                            zadanieOstateczne.Add(sortedList[sortedList.Count - 1]);
                         else
-
+                        
                             zadanieOstateczne.Insert(h, sortedList[sortedList.Count - 1]);
 
-                           //. MessageBox.Show(zadanieOstateczne.Count.ToString());
-
-                            foreach (Zadanie zadanie in zadanieOstateczne)
+                       
+                        //Array.Clear(czasyy1, 0, czasyy1.Length);
+                        foreach (Zadanie zadanie in zadanieOstateczne)
                         {
+                            
                             var jp = zadanie.arr;
                             for (int m = 0; m < maszyny; m++)
                                 czasyy1[i, m] = jp[m];
-
+                            
                         }
 
-
+                        
 
                         int tmpczas = Czas(czasyy1);
+                        MessageBox.Show(tmpczas.ToString()+" ",h.ToString());
 
                         if (tmpczas < czas)
                         {
                             czas = tmpczas;
-                                
-                            }
-                        
-                    else
+                          
+                            numer = h;
+                            zadanieOstateczne.RemoveAt(h);
+                            if (h == i)
+                                logiczna = true;
+                            else
+                                logiczna = false;
+                        }
+
+                        else
                         {
-                                zadanieOstateczne.RemoveAt(h);
+                            zadanieOstateczne.RemoveAt(h);
 
-                                MessageBox.Show(zadanieOstateczne.Count.ToString());
-                            }
+                       
+                        }
 
-                            sortedList.RemoveAt(sortedList.Count - 1);
-                        }
-                            
-                        }
+
+
+                    }
+                    if (logiczna)
+                    {
+                        zadanieOstateczne.Add(sortedList[sortedList.Count - 1]);
+                       
+                    }
+                    else
+                        zadanieOstateczne.Insert(numer, sortedList[sortedList.Count - 1]);
                     
+                    sortedList.RemoveAt(sortedList.Count - 1);
                 }
-                // MessageBox.Show(sortedList.Count.ToString());
-            }
+
+
+                }
             
                         
             int ih = 0;
@@ -235,9 +256,10 @@ namespace SPD
                 bestOptJ += (zadanie.id + 1).ToString();
               
             }
-           // MessageBox.Show(zadanieOstateczne.Count.ToString());
-          //  MessageBox.Show(czasyy1.Length.ToString());
-            return czasyy1;
+            //foreach (Zadanie zadanie in zadanieOstateczne)
+               //  MessageBox.Show(zadanie.id.ToString());
+                //  MessageBox.Show(czasyy1.Length.ToString());
+                return czasyy1;
 
         }
 
