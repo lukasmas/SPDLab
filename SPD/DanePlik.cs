@@ -22,6 +22,8 @@ namespace SPD
         public int cMin { get; set; }
         public string bestOpt { get; set; }
         public string bestOptJ { get; set; }
+        public string bestOptJ1 { get; set; }
+        public string bestOptN1 { get; set; }
 
 
         public List<Task> tasksList= new List<Task>();
@@ -116,6 +118,8 @@ namespace SPD
 
         public int[,] ListMadeOfTable(List<Task> tasklist)
         {
+            bestOptJ = string.Empty;
+            bestOptJ1 = string.Empty;
             int dlugosc = tasklist.Count();
             
             int count = 0;
@@ -128,6 +132,7 @@ namespace SPD
                     tablica[count, 1] = element.machineTime2;
                     tablica[count, 2] = element.machineTime3;
                     bestOptJ += (element.id+1).ToString();
+                    bestOptJ1 +=" " +(element.id + 1).ToString();
                     count++;
                 }
 
@@ -143,6 +148,7 @@ namespace SPD
                     tablica[count, 0] = element.machineTime1;
                     tablica[count, 1] = element.machineTime2;
                     bestOptJ += (element.id + 1).ToString();
+                    bestOptJ1 += " " + (element.id + 1).ToString();
 
                     count++;
                 }
@@ -162,96 +168,67 @@ namespace SPD
 
         public int [,]  Neh()
         {
-            List<Zadanie> sortedList = zadaniesList.OrderBy(o => o.timeAll).ToList();
+            bestOptJ = string.Empty;
+            bestOptN1 = string.Empty;
+            List<Zadanie> temporary = new List<Zadanie>();
+            temporary = zadaniesList;
+            List<Zadanie> sortedList = temporary.OrderBy(o => o.timeAll).ToList();
             List<Zadanie> zadanieOstateczne = new List<Zadanie>();
             int numer=0;
-            // Zadanie hg=null;
-            
             int[,] czasyy1 = new int[zadania, maszyny];
 
             for (int i = 0; i < zadania; i++)
-            {
-              //  
-                int czas = 999999999;
-               
+            {                
+                
+                int czas = 999999999;               
                 if (sortedList.Count > 0)
                 {
-                    
-                    for (int h = 0; h < i + 1; h++)
-
-                    {
-                      
-
-
-                      
-                        
-                            zadanieOstateczne.Insert(h, sortedList[sortedList.Count - 1]);
-
-                       
-                        
-                        foreach (Zadanie zadanie in zadanieOstateczne)
+                        for (int h = 0; h < i + 1; h++)
                         {
-                            
-                            var jp = zadanie.arr;
+                            zadanieOstateczne.Insert(h, sortedList[sortedList.Count - 1]);
+                        int pih = 0;
+                        foreach (Zadanie zadanie in zadanieOstateczne)
+                            {
+
+                                var jp = zadanie.arr;
                             for (int m = 0; m < maszyny; m++)
-                                czasyy1[i, m] = jp[m];
-                            
+                            {
+                                czasyy1[pih, m] = jp[m];
+                              
+                            }
+                            pih++;
                         }
-
-                        
-
                         int tmpczas = Czas(czasyy1);
                        
-
                         if (tmpczas < czas)
-                        {
-                            czas = tmpczas;
-                          
-                            numer = h;
-                       
-                            zadanieOstateczne.Remove(sortedList[sortedList.Count - 1]);
-                            
+                            {
+                                czas = tmpczas;
+                                numer = h;                      
+                                zadanieOstateczne.Remove(sortedList[sortedList.Count - 1]);
+                            }
+                            else
+                            {
+                                zadanieOstateczne.Remove(sortedList[sortedList.Count - 1]);
+                            }
                         }
-
-                        else
-                        {
-                            zadanieOstateczne.Remove(sortedList[sortedList.Count - 1]);
-
-                       
-                        }
-
-
-
-                    }
-                   
-                        zadanieOstateczne.Insert(numer, sortedList[sortedList.Count - 1]);
                     
-                    sortedList.RemoveAt(sortedList.Count - 1);
-                  
+                    zadanieOstateczne.Insert(numer, sortedList[sortedList.Count - 1]);
+                        sortedList.RemoveAt(sortedList.Count - 1);
                 }
-
-
-                }
-            
-                        
+                }                                  
             int ih = 0;
                 foreach (Zadanie zadanie in zadanieOstateczne)
             {
                 var jp = zadanie.arr;
                 for (int m = 0; m < maszyny; m++)
                 {
-                    czasyy1[ih, m] = jp[m];
-                    
+                    czasyy1[ih, m] = jp[m];                    
                 }
                 ih++;
-                bestOptJ += (zadanie.id + 1).ToString();
-              
+                bestOptJ += (zadanie.id+1 ).ToString();
+                bestOptN1 += " " + (zadanie.id + 1).ToString();
             }
-            //foreach (Zadanie zadanie in zadanieOstateczne)
-               //  MessageBox.Show(zadanie.id.ToString());
-                //  MessageBox.Show(czasyy1.Length.ToString());
                 return czasyy1;
-
         }
 
         public DanePlik(string nazwa_plik, int h, int w, int[,] vs)
@@ -391,7 +368,7 @@ namespace SPD
                     }
                     else
                     {
-                        if (t_zwolnienia[i] >= t_zwolnienia[i - 1])
+                        if (t_zwolnienia[i] >= t_zwolnienia[i - 1]) //tu zmienione, zabrane rowna sie
                             t_zwolnienia[i] += (t_czas);
                         else
                             t_zwolnienia[i] = t_zwolnienia[i - 1] + (t_czas);

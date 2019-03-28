@@ -231,33 +231,66 @@ namespace SPD
 
             int[,] temp_czasy;
             string numery = string.Empty;
-
+            string numery1 = string.Empty;
+            xd.Text = "0";
+            temp_czasy = null;
             switch (co)
             {
+               
                 case 0:
                     {
-                        temp_czasy = (temp.czasy);
-                        xd.Text = temp.Czas(temp.czasy).ToString();
+                         temp_czasy = (temp.czasy);
+                         xd.Text = temp.Czas(temp.czasy).ToString();
+                        
+
                         break;
                     }
 
                 case 1:
                     {
+                        
+                        DateTime startTime = DateTime.Now;
+
+
                         temp_czasy = temp.Neh();
                         //temp_czasy = (temp.JohnsonNaSztywno());
                         // numery = temp.bestOptJ;
                         numery = temp.bestOptJ;
+                        
+                        numery1 = temp.bestOptN1;
                         //xd.Text = temp.Czas(temp.JohnsonNaSztywno()).ToString();
                         xd.Text = temp.Czas(temp.Neh()).ToString();
-                      //  kupa.Text += temp.permutacje[i] + " : " + temp.czasy_permutacje[i].ToString() + " \n";
+                         kupa.Text = numery1;
+
+                        DateTime stopTime = DateTime.Now;
+                        TimeSpan roznica = stopTime - startTime;
+
+                        MessageBox.Show("Czas pracy:" + roznica.TotalMilliseconds);
                         break;
                     }
 
                 case 2:
                     {
-                        temp_czasy = (temp.prez_wy);
-                        numery = temp.bestOpt;
+                         temp_czasy = (temp.prez_wy);
+                         numery = temp.bestOpt;
                         xd.Text = temp.Czas(temp.prez_wy).ToString();
+                       
+                        break;
+                    }
+                case 3:
+                    {
+                        
+                        DateTime startTime = DateTime.Now;
+
+
+                        temp_czasy = (temp.JohnsonNaSztywno());
+                         numery = temp.bestOptJ;
+                        numery1 = temp.bestOptJ1;
+                        xd.Text = temp.Czas(temp_czasy).ToString();
+                        kupa.Text = numery1;
+                        DateTime stopTime = DateTime.Now;
+                        TimeSpan roznica = stopTime - startTime;    
+                        MessageBox.Show("Czas pracy:" + roznica.TotalMilliseconds);
                         break;
                     }
                 default:
@@ -477,8 +510,8 @@ namespace SPD
             Random rnd = new Random();
 
             int max_maszyn = 3;
-            int max_zadan = 6;
-            int max_time = 15;
+            int max_zadan = 100;
+            int max_time = 45;
             int indeks = 0;
 
 
@@ -523,6 +556,11 @@ namespace SPD
             }
           //  danePliks[0].Neh();
             MessageBox.Show("Dane zostały wygenerowane","Dane");
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Clear(3);
         }
     }
 
