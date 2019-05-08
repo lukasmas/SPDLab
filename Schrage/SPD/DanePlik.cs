@@ -117,12 +117,12 @@ namespace SPD
 
         private int[] MaxDeliveryTime(List<int[]> Order)
         {
-            int minPrepTime = int.MaxValue;
+            int minPrepTime = int.MinValue;
             int index = 0;
             foreach (var zadanie in Order)
             {
 
-                if (zadanie[2] < minPrepTime)
+                if (zadanie[2] > minPrepTime)
                 {
                     index = Order.IndexOf(zadanie);
                     minPrepTime = zadanie[2];
@@ -159,7 +159,7 @@ namespace SPD
 
             for (int i = 0; i < zadania; i++)
             {
-                time += schrageOrder[i,1];
+                time = Math.Max(time,schrageOrder[i, 0])+schrageOrder[i,1];
                 cmax = Math.Max(cmax, time + schrageOrder[i, 2]);
             }
             return cmax;
@@ -249,6 +249,7 @@ namespace SPD
                 {
                     arr = MaxDeliveryTime(Ng);
                     j = Ng[arr[1]];
+                    l = j;
                     Ng.Remove(j);
                     time += j[1];
                     Cmax = Math.Max(Cmax, time + j[2]);

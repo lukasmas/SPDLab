@@ -307,7 +307,8 @@ namespace SPD
                 case 5:
                     {
                         temp_czasy = temp.Schrage();
-                        xd.Text = temp.SchragePtmn().ToString();
+                         xd.Text = temp.SchragePtmn().ToString();
+                        //xd.Text = temp.ShrageCmax(temp.Schrage()).ToString();
                         //kupa.Text = numery1;
                         break;
                     }
