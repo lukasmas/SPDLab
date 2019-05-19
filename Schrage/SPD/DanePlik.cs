@@ -97,7 +97,7 @@ namespace SPD
 
 
         }
-
+       
         public int Calier()
         {
             int[,] orderFromSchrage = Schrage();
@@ -110,11 +110,72 @@ namespace SPD
             i = findA();
             c = findC();
             if (c == -1)
-                return U;
+                return UB;
+
+            //int[,] K = orderFromSchrage;
+
+            var temprk = new List<int>();
+            var tempqk = new List<int>();
+            var temppk = new List<int>();
+            for (int incrementy = c + 1; incrementy < b + 1; incrementy++)
+            {
+                temprk.Add(orderCarlier[incrementy, 0]);
+                tempqk.Add(orderCarlier[incrementy, 2]);
+                temppk.Add(orderCarlier[incrementy, 1]);
+            }
+            /*  var temprk=new List<int>();
+
+              int increment = 0;
+              foreach (var element in K)
+              {
+                  increment++;
+                  temprk.Add(orderCarlier[increment, 0]);
+              }
+              var rk = temprk.Min();
+              var tempqk = new List<int>();
 
 
+              foreach (var element in K)
+              {
+                  increment++;
+                  tempqk.Add(orderCarlier[increment, 2]);
+              }
+              var qk=tempqk.Min();
+              var temppk = new List<int>();
 
-            return U;
+
+              foreach (var element in K)
+              {
+                  increment++;
+                  temppk.Add(orderCarlier[increment, 1]);
+              }
+              var pk = temppk.Sum();
+
+      */
+            var rk = temprk.Min();
+            var qk = tempqk.Min();
+            var pk = temppk.Sum();
+            var hK = rk + pk + qk;
+
+            orderCarlier[c, 0] = Math.Max(orderCarlier[c, 0], rk + pk);
+            LB = SchragePtmn();
+            var hKc = Math.Min(rk, orderCarlier[c, 0] + pk + orderCarlier[c, 1] + Math.Min(qk, orderCarlier[c, 2]));
+            LB = Math.Max(hK,  LB);
+            LB= Math.Max(hKc, LB);
+            if (LB < UB)
+            {
+                Calier();
+            }
+            orderCarlier[c, 2] = Math.Max(orderCarlier[c, 2], qk + pk);
+            LB = SchragePtmn();
+            hKc = Math.Min(rk, orderCarlier[c, 0] + pk + orderCarlier[c, 1] + Math.Min(qk, orderCarlier[c, 2]));
+            LB = Math.Max(hK, LB);
+            LB = Math.Max(hKc, LB); ;
+            if (LB<UB)
+            {
+                Calier();
+            }
+            return UB;
 
 
         }
@@ -129,7 +190,7 @@ namespace SPD
                 if (cmax == temp)
                 {
                     b = i;
-                    break;
+                    
                 }
             }
 
