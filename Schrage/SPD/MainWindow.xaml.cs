@@ -312,6 +312,14 @@ namespace SPD
                         //kupa.Text = numery1;
                         break;
                     }
+                case 6:
+                    {
+
+                        temp_czasy = (temp.czasy);
+                        xd.Text = "Calier: " + temp.Calier().ToString();
+                        
+                        break;
+                    }
                 default:
                     {
                         temp_czasy = (temp.czasy);
@@ -591,6 +599,11 @@ namespace SPD
         {
             Clear(5);
             
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            Clear(6);
         }
     }
 

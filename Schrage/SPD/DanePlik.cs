@@ -27,6 +27,17 @@ namespace SPD
         public string bestOptA { get; set; }
         public string bestOptA1 { get; set; }
 
+        // CARLIER
+
+        public int U { get; set; }
+        public int UB { get; set; }
+        public int LB { get; set; }
+        public int i { get; set; }
+        public int b { get; set; }
+        public int c { get; set; }
+        public int[,] orderCarlier { get; set; }
+
+
 
         public List<Task> tasksList= new List<Task>();
         public List<Zadanie> zadaniesList = new List<Zadanie>();
@@ -37,6 +48,13 @@ namespace SPD
             maszyny = w;
             zadania = h;
             cMin = 999999;
+            U = 0;
+            UB = int.MaxValue;
+            LB = 0;
+            i = 0;
+            b = 0;
+            c = -1;
+            orderCarlier = new int[zadania, maszyny];
 
             czasy = new int[zadania, maszyny];
             for (int i = 0; i < h; i++)
@@ -78,6 +96,78 @@ namespace SPD
             }
 
 
+        }
+
+        public int Calier()
+        {
+            int[,] orderFromSchrage = Schrage();
+            U = ShrageCmax(orderFromSchrage);
+            if (U < UB){
+                UB = U;
+                orderCarlier = orderFromSchrage;
+            }
+            b = findB();
+            i = findA();
+            c = findC();
+            if (c == -1)
+                return U;
+
+
+
+            return U;
+
+
+        }
+
+        private int findB()
+        {
+            int end = czasy.GetLength(0) - 1;
+            int cmax = ShrageCmax(orderCarlier);
+            for (int i = 0; i <end; i++)
+            {
+                int temp = ShrageCmax(orderCarlier, i) + orderCarlier[i, 2];
+                if (cmax == temp)
+                {
+                    b = i;
+                    break;
+                }
+            }
+
+            return b;
+        }
+        private int findA()
+        {
+            int suma = 0;
+            for (i = 0; i < b; i++)
+            {
+
+                suma = 0;
+                for (int s = i; s <= b; s++)
+                {
+                    suma += orderCarlier[s,1];
+                }
+
+                if (U == (orderCarlier[i,0] + suma + orderCarlier[b,2]))
+                {
+                    return i;
+                }
+            }
+            return i;
+        }
+        private int findC()
+        {
+            c = -1;
+            int i;
+            for (i = b; i >= this.i; i--)
+            {
+                if (orderCarlier[i, 2] < orderCarlier[b, 2])
+                {
+                    c = i;
+                    break;
+                }
+            }
+
+            return c;
         }
 
         private List<int[]> CzasyToList()
@@ -163,6 +253,19 @@ namespace SPD
                 cmax = Math.Max(cmax, time + schrageOrder[i, 2]);
             }
             return cmax;
+        }
+
+        public int ShrageCmax(int[,] schrageOrder, int stopAt)
+        {
+            //int cmax = 0;
+            int time = 0;
+
+            for (int i = 0; i < stopAt; i++)
+            {
+                time = Math.Max(time, schrageOrder[i, 0]) + schrageOrder[i, 1];
+                //cmax = Math.Max(cmax, time + schrageOrder[i, 2]);
+            }
+            return time;
         }
 
         public int[,] Schrage()
