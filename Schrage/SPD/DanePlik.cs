@@ -28,34 +28,44 @@ namespace SPD
         public string bestOptA1 { get; set; }
 
         // CARLIER
-
+        /*
         public int U { get; set; }
         public int UB { get; set; }
         public int LB { get; set; }
-        public int i { get; set; }
+        public int a { get; set; }
         public int b { get; set; }
         public int c { get; set; }
         public int[,] orderCarlier { get; set; }
+        public int[,] orderFromSchrage { get; set; }
 
-
-
+            */
+        public int U;
+        public int UB;
+        public int LB;
+        public int a;
+        public int b;
+        public int c;
+        public int[,] orderCarlier;
+        public int[,] orderFromSchrage; 
         public List<Task> tasksList= new List<Task>();
         public List<Zadanie> zadaniesList = new List<Zadanie>();
-
+        Obiekt Obiekt = new Obiekt(0, 0, -1);
+        
         public DanePlik(string nazwa_plik, int h, int w, int[,] vs)
         {
             nazwa = nazwa_plik;
             maszyny = w;
             zadania = h;
             cMin = 999999;
-            U = 0;
-            UB = int.MaxValue;
-            LB = 0;
-            i = 0;
+            Obiekt.U = 0;
+            Obiekt.UB = int.MaxValue;
+            Obiekt.LB = 0;
+            a = 0;
             b = 0;
             c = -1;
             orderCarlier = new int[zadania, maszyny];
-
+           Obiekt.orderFromSchrage = new int[zadania, maszyny];
+            //Obiekt Obiekt = new Obiekt(0, 0, -1);
             czasy = new int[zadania, maszyny];
             for (int i = 0; i < h; i++)
             {
@@ -100,28 +110,44 @@ namespace SPD
        
         public int Calier()
         {
-            int[,] orderFromSchrage = Schrage();
-            U = ShrageCmax(orderFromSchrage);
-            if (U < UB){
-                UB = U;
-                orderCarlier = orderFromSchrage;
+            Obiekt.orderFromSchrage = Schrage();
+            Obiekt.U = ShrageCmax(Obiekt.orderFromSchrage);
+            
+            if (Obiekt.U < Obiekt.UB){
+                
+                Obiekt.UB = Obiekt.U;
+                
+                
             }
-            b = findB();
-            i = findA();
-            c = findC();
-            if (c == -1)
-                return UB;
+            Console.WriteLine("Tu ub"+Obiekt.UB);
+            Obiekt.b = findB();
+            Console.WriteLine(Obiekt.b);
+            Obiekt.a = findA();
+             Console.WriteLine(Obiekt.a);
+            Obiekt.c = findC();
+            Console.WriteLine(Obiekt.c);
+            if (Obiekt.c == -1)
+            {
+               
+                return Obiekt.UB;
+            }
 
             //int[,] K = orderFromSchrage;
-
-            var temprk = new List<int>();
-            var tempqk = new List<int>();
-            var temppk = new List<int>();
-            for (int incrementy = c + 1; incrementy < b + 1; incrementy++)
+         //   Console.WriteLine("kupa11");
+           // var temprk = new List<int>();
+           // var tempqk = new List<int>();
+           // var temppk = new List<int>();
+            int min1=999999999;
+            int min2=999999999;
+            int sum=0;
+            for (int incrementy = Obiekt.c + 1; incrementy <= Obiekt.b ; incrementy++)
             {
-                temprk.Add(orderCarlier[incrementy, 0]);
-                tempqk.Add(orderCarlier[incrementy, 2]);
-                temppk.Add(orderCarlier[incrementy, 1]);
+              //  temprk.Add(Obiekt.orderFromSchrage[incrementy, 0]);
+               // tempqk.Add(Obiekt.orderFromSchrage[incrementy, 2]);
+               // temppk.Add(Obiekt.orderFromSchrage[incrementy, 1]);
+                min1 = Math.Min(min1, Obiekt.orderFromSchrage[incrementy, 0]);
+                min2 = Math.Min(min2, Obiekt.orderFromSchrage[incrementy, 2]);
+                sum += Obiekt.orderFromSchrage[incrementy, 1];
             }
             /*  var temprk=new List<int>();
 
@@ -152,83 +178,117 @@ namespace SPD
               var pk = temppk.Sum();
 
       */
-            var rk = temprk.Min();
-            var qk = tempqk.Min();
-            var pk = temppk.Sum();
-            var hK = rk + pk + qk;
+            //var rk = temprk.Min();
+            // var qk = tempqk.Min();
+            // var pk = temppk.Sum();
+            var rk = min1;
+             var qk = min2;
+             var pk = sum;
 
-            orderCarlier[c, 0] = Math.Max(orderCarlier[c, 0], rk + pk);
-            LB = SchragePtmn();
-            var hKc = Math.Min(rk, orderCarlier[c, 0] + pk + orderCarlier[c, 1] + Math.Min(qk, orderCarlier[c, 2]));
-            LB = Math.Max(hK,  LB);
-            LB= Math.Max(hKc, LB);
-            if (LB < UB)
+            var hK = rk + pk + qk;
+            int temp;
+            temp = Obiekt.orderFromSchrage[Obiekt.c, 0];
+            Obiekt.orderFromSchrage[Obiekt.c, 0] = Math.Max(Obiekt.orderFromSchrage[Obiekt.c, 0], rk + pk);
+            Obiekt.LB = SchragePtmn();
+           
+            var hKc = Math.Min(rk, Obiekt.orderFromSchrage[Obiekt.c, 0] + pk + Obiekt.orderFromSchrage[Obiekt.c, 1] + Math.Min(qk, Obiekt.orderFromSchrage[Obiekt.c, 2]));
+            Obiekt.LB = Math.Max(hK, Obiekt.LB);
+            Obiekt.LB = Math.Max(hKc, Obiekt.LB);
+            Console.WriteLine("Tu lb"+Obiekt.LB);
+            if (Obiekt.LB < Obiekt.UB)
             {
-                Calier();
+                
+               Obiekt.UB=Calier();
             }
-            orderCarlier[c, 2] = Math.Max(orderCarlier[c, 2], qk + pk);
-            LB = SchragePtmn();
-            hKc = Math.Min(rk, orderCarlier[c, 0] + pk + orderCarlier[c, 1] + Math.Min(qk, orderCarlier[c, 2]));
-            LB = Math.Max(hK, LB);
-            LB = Math.Max(hKc, LB); ;
-            if (LB<UB)
+           
+            //Obiekt.orderFromSchrage[c, 0] = temp;
+            int temp1 = Obiekt.orderFromSchrage[c, 2];
+            Obiekt.orderFromSchrage[c, 2] = Math.Max(Obiekt.orderFromSchrage[c, 2], qk + pk);
+            Obiekt.LB = SchragePtmn();
+            hKc = Math.Min(rk, Obiekt.orderFromSchrage[Obiekt.c, 0] + pk + Obiekt.orderFromSchrage[Obiekt.c, 1] + Math.Min(qk, Obiekt.orderFromSchrage[Obiekt.c, 2]));
+            Obiekt.LB = Math.Max(hK, Obiekt.LB);
+            Obiekt.LB = Math.Max(hKc, Obiekt.LB); ;
+           
+            if (Obiekt.LB < Obiekt.UB)
             {
-                Calier();
+                
+                Obiekt.UB=Calier();
+                
             }
-            return UB;
+          //  Obiekt.orderFromSchrage[c, 2] = temp1;
+            
+            return Obiekt.U;
+            
+            
 
 
         }
 
         private int findB()
         {
-            int end = czasy.GetLength(0) - 1;
-            int cmax = ShrageCmax(orderCarlier);
-            for (int i = 0; i <end; i++)
+            int end = zadania;
+            int cmax = ShrageCmax(Obiekt.orderFromSchrage);
+            int time = 0;
+            for (int j =end-1; j>0; j--)
             {
-                int temp = ShrageCmax(orderCarlier, i) + orderCarlier[i, 2];
+               // Console.WriteLine(j);
+               
+                int temp =( ShrageCmax(Obiekt.orderFromSchrage,j) + Obiekt.orderFromSchrage[j, 2]);
+                
+                //Console.WriteLine(temp + "cmax" + cmax);
+               
                 if (cmax == temp)
                 {
-                    b = i;
                     
+                    Obiekt.b = j;
+                    break;
                 }
             }
-
-            return b;
+           // Console.WriteLine(b);
+            return Obiekt.b;
         }
         private int findA()
         {
             int suma = 0;
-            for (i = 0; i < b; i++)
+            int cmax = ShrageCmax(Obiekt.orderFromSchrage);
+            for (int i = 0; i < Obiekt.b; i++)
             {
-
+             //   Console.WriteLine(i);
                 suma = 0;
-                for (int s = i; s <= b; s++)
+                for (int s = i; s <= Obiekt.b; s++)
                 {
-                    suma += orderCarlier[s,1];
+              //      Console.WriteLine(s);
+                    suma += Obiekt.orderFromSchrage[s,1];
                 }
 
-                if (U == (orderCarlier[i,0] + suma + orderCarlier[b,2]))
+                if (cmax == (Obiekt.orderFromSchrage[i,0] + suma + Obiekt.orderFromSchrage[Obiekt.b,2]))
                 {
-                    return i;
+                    
+                    Obiekt.a = i;
+                    break;
+                    
                 }
             }
-            return i;
+           // Console.WriteLine(i);
+            return Obiekt.a;
         }
         private int findC()
         {
-            c = -1;
-            int i;
-            for (i = b; i >= this.i; i--)
+            Obiekt.c = -1;
+            int o;
+            for (o = Obiekt.b; o >= Obiekt.a; o--)
             {
-                if (orderCarlier[i, 2] < orderCarlier[b, 2])
+              //  Console.WriteLine(o);
+                if (Obiekt.orderFromSchrage[o, 2] < Obiekt.orderFromSchrage[Obiekt.b, 2])
                 {
-                    c = i;
+                    
+                     
+                    Obiekt.c = o;
                     break;
                 }
             }
-
-            return c;
+          
+            return Obiekt.c;
         }
 
         private List<int[]> CzasyToList()
@@ -321,7 +381,7 @@ namespace SPD
             //int cmax = 0;
             int time = 0;
 
-            for (int i = 0; i < stopAt; i++)
+            for (int i = 0; i <=stopAt; i++)
             {
                 time = Math.Max(time, schrageOrder[i, 0]) + schrageOrder[i, 1];
                 //cmax = Math.Max(cmax, time + schrageOrder[i, 2]);
