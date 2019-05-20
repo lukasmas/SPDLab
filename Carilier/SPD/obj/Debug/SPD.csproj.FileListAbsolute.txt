@@ -1,0 +1,64 @@
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\bin\Debug\SPD.exe.config
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\bin\Debug\SPD.exe
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\bin\Debug\SPD.pdb
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.csprojAssemblyReference.cache
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\MainWindow.g.cs
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\App.g.cs
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD_MarkupCompile.cache
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD_MarkupCompile.lref
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\App.baml
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\MainWindow.baml
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.g.resources
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.Properties.Resources.resources
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.csproj.GenerateResource.cache
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.csproj.CoreCompileInputs.cache
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.exe
+C:\Users\Paweł\Downloads\SPDLab-master (4)\SPDLab-master\Schrage\SPD\obj\Debug\SPD.pdb
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\bin\Debug\SPD.exe.config
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\bin\Debug\SPD.exe
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\bin\Debug\SPD.pdb
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.csprojAssemblyReference.cache
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\MainWindow.g.cs
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\App.g.cs
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD_MarkupCompile.cache
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD_MarkupCompile.lref
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\App.baml
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\MainWindow.baml
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.g.resources
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.Properties.Resources.resources
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.csproj.GenerateResource.cache
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.csproj.CoreCompileInputs.cache
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.exe
+C:\Users\Lukas\Source\Repos\SPD\Schrage\SPD\obj\Debug\SPD.pdb
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\bin\Debug\SPD.exe.config
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\bin\Debug\SPD.exe
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\bin\Debug\SPD.pdb
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.csprojAssemblyReference.cache
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\MainWindow.g.cs
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\App.g.cs
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD_MarkupCompile.cache
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD_MarkupCompile.lref
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\App.baml
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\MainWindow.baml
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.g.resources
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.Properties.Resources.resources
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.csproj.GenerateResource.cache
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.csproj.CoreCompileInputs.cache
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.exe
+C:\Users\Paweł\Downloads\SPDLab-carliertrying\Schrage\SPD\obj\Debug\SPD.pdb
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\bin\Debug\SPD.exe.config
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\bin\Debug\SPD.exe
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\bin\Debug\SPD.pdb
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.csprojAssemblyReference.cache
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\MainWindow.g.cs
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\App.g.cs
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD_MarkupCompile.cache
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD_MarkupCompile.lref
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\App.baml
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\MainWindow.baml
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.g.resources
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.Properties.Resources.resources
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.csproj.GenerateResource.cache
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.csproj.CoreCompileInputs.cache
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.exe
+C:\Users\Paweł\Downloads\SPDLab-carlierstilltrying\Schrage\SPD\obj\Debug\SPD.pdb
