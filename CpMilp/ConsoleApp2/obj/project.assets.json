@@ -1157,6 +1157,7 @@
       "path": "microsoft.netcore.targets/2.0.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
@@ -1303,23 +1304,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Paweł\\.nuget\\packages\\": {},
+    "C:\\Users\\Lukas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Paweł\\source\\repos\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
+      "projectUniqueName": "C:\\Users\\Lukas\\Source\\Repos\\SPDLab-master\\CpMilp\\ConsoleApp2\\ConsoleApp2.csproj",
       "projectName": "ConsoleApp2",
-      "projectPath": "C:\\Users\\Paweł\\source\\repos\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
-      "packagesPath": "C:\\Users\\Paweł\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Paweł\\source\\repos\\ConsoleApp2\\ConsoleApp2\\obj\\",
+      "projectPath": "C:\\Users\\Lukas\\Source\\Repos\\SPDLab-master\\CpMilp\\ConsoleApp2\\ConsoleApp2.csproj",
+      "packagesPath": "C:\\Users\\Lukas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lukas\\Source\\Repos\\SPDLab-master\\CpMilp\\ConsoleApp2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Paweł\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

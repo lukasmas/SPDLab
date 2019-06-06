@@ -13,10 +13,11 @@ public class my_program
         public int p;
         public int q;
 
-        public RPQ_Job(){
+        public RPQ_Job()
+        {
             id = p = q = r = 0;
 
-            }
+        }
     }
 
     public class RPQ_Instance
@@ -24,35 +25,41 @@ public class my_program
         public List<RPQ_Job> jobs = new List<RPQ_Job>();
     }
 
-    private static void RunLinearProgrammingExample(String solverType)
-    {
-        Solver solver = Solver.CreateSolver("IntegerProgramming", solverType);
-        // Create the variables x and y.
-        Variable x = solver.MakeNumVar(0.0, 1.0, "x");
-        Variable y = solver.MakeNumVar(0.0, 2.0, "y");
-        // Create the objective function, x + y.
-        Objective objective = solver.Objective();
-        objective.SetCoefficient(x, 1);
-        objective.SetCoefficient(y, 1);
-        objective.SetMaximization();
-        // Call the solver and display the results.
-        solver.Solve();
-        Console.WriteLine("Solution:");
-        Console.WriteLine("x = " + x.SolutionValue());
-        Console.WriteLine("y = " + y.SolutionValue());
-    }
+    //private static void RunLinearProgrammingExample(String solverType)
+    //{
+    //    Solver solver = Solver.CreateSolver("IntegerProgramming", solverType);
+    //    Create the variables x and y.
+    //    Variable x = solver.MakeNumVar(0.0, 1.0, "x");
+    //    Variable y = solver.MakeNumVar(0.0, 2.0, "y");
+    //    Create the objective function, x +y.
+    //    Objective objective = solver.Objective();
+    //    objective.SetCoefficient(x, 1);
+    //    objective.SetCoefficient(y, 1);
+    //    objective.SetMaximization();
+    //    Call the solver and display the results.
+    //   solver.Solve();
+    //    Console.WriteLine("Solution:");
+    //    Console.WriteLine("x = " + x.SolutionValue());
+    //    Console.WriteLine("y = " + y.SolutionValue());
+    //}
 
     static void Main()
     {
         //RunLinearProgrammingExample("GLOP_LINEAR_PROGRAMMING");
-       
-            RPQ_Instance sth = new RPQ_Instance() ;
-        RPQ_Job temp = new RPQ_Job();
-        RPQ_Job temp1= new RPQ_Job();
-        RPQ_Job temp2= new RPQ_Job();
-        RPQ_Job temp3= new RPQ_Job();
+        DateTime start;
+        DateTime start1;
+        DateTime end;
+        DateTime end1;
 
-       
+
+
+        RPQ_Instance sth = new RPQ_Instance();
+        RPQ_Job temp = new RPQ_Job();
+        RPQ_Job temp1 = new RPQ_Job();
+        RPQ_Job temp2 = new RPQ_Job();
+        RPQ_Job temp3 = new RPQ_Job();
+
+
         temp.id = 0;
         temp.r = 0;
         temp.p = 27;
@@ -74,10 +81,17 @@ public class my_program
         temp3.p = 76;
         temp3.q = 5;
         sth.jobs.Add(temp3);
-        
+        start = DateTime.Now;
+        SolveInstance(sth);
+        end = DateTime.Now;
+        Console.WriteLine(end - start);
+
+        start1 = DateTime.Now;
         SolveInstance1(sth);
+        end1 = DateTime.Now;
+        Console.WriteLine(end1 - start1);
         Console.ReadKey();
-       
+
     }
     public static void SolveInstance(RPQ_Instance instance)
     {
@@ -123,7 +137,7 @@ public class my_program
         }
         solver.Minimize(cmax);
         Solver.ResultStatus resultStatus = solver.Solve();
-       // Console.WriteLine(solver.);
+        // Console.WriteLine(solver.);
         if (resultStatus != Solver.ResultStatus.OPTIMAL)
         {
             Console.WriteLine("Solver didn’t find optimal solution!");
@@ -132,26 +146,27 @@ public class my_program
     }
     public static void SolveInstance1(RPQ_Instance instance)
     {
-       
+
         CpModel model = new CpModel();
         CpSolver solver = new CpSolver();
         //maksymalnawartosczmiennych,liczonazduzaprzesada
         int variablesMaxValue = 0;
         foreach (RPQ_Job job in instance.jobs)
             variablesMaxValue += job.r + job.p + job.q;
-      
+
         var alfas = new IntVar[instance.jobs.Count, instance.jobs.Count];
         for (int i = 0; i < instance.jobs.Count; i++)
         {
             for (int j = 0; j < instance.jobs.Count; j++)
             {
                 alfas[i, j] = model.NewIntVar(0, 1, "alfa" + i + "_" + j);
-            } }
+            }
+        }
         var starts = new IntVar[instance.jobs.Count];
-        
+
         for (int i = 0; i < instance.jobs.Count; i++)
         {
-            starts[i]= model.NewIntVar(0, variablesMaxValue, "starts"+ i);
+            starts[i] = model.NewIntVar(0, variablesMaxValue, "starts" + i);
         }
         //cmax:
         var cmax = model.NewIntVar(0, variablesMaxValue, "cmax");
@@ -182,14 +197,14 @@ public class my_program
         }
         model.Minimize(cmax);
         CpSolverStatus resultStatus = solver.Solve(model);
-        Console.WriteLine(solver.ResponseStats());
+        //Console.WriteLine(solver.ResponseStats());
 
         if (resultStatus != CpSolverStatus.Optimal)
         {
-           Console.WriteLine("Solver didn’t find optimal solution!");
-       }
+            Console.WriteLine("Solver didn’t find optimal solution!");
+        }
         Console.WriteLine("Objective value=" + solver.ObjectiveValue);
     }
 
-    
+
 }
